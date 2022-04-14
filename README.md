@@ -13,3 +13,4 @@ npm start
 ```
 
 Now you are good to go
+Note: you'll need an ORM for MongoDB if you wanna see the data on the database.
