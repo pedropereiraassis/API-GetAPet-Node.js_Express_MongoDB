@@ -10,19 +10,19 @@ module.exports = class UserController {
     const { name, email, phone, password, confirmPassword } = req.body;
 
     if(!name) {
-      return res.status(422).json({message: "name is required."});
-    };
-
-    if(!email) {
-      return res.status(422).json({message: "email is required."});
+      return res.status(422).json({message: "Name is required."});
     };
 
     if(!phone) {
-      return res.status(422).json({message: "phone is required."});
+      return res.status(422).json({message: "Phone is required."});
+    };
+
+    if(!email) {
+      return res.status(422).json({message: "Email is required."});
     };
 
     if(!password) {
-      return res.status(422).json({message: "password is required."});
+      return res.status(422).json({message: "Password is required."});
     };
 
     if(!confirmPassword) {
@@ -30,13 +30,13 @@ module.exports = class UserController {
     };
 
     if(password != confirmPassword) {
-      return res.status(422).json({message: "passwords doesn't match."});
+      return res.status(422).json({message: "Passwords doesn't match."});
     };
 
     const userExists = await User.findOne({ email: email });
 
     if(userExists) {
-      return res.status(422).json({message: "email already in use."});
+      return res.status(422).json({message: "Email already in use."});
     };
 
     const salt = await bcrypt.genSalt(12);
@@ -56,17 +56,17 @@ module.exports = class UserController {
     const { email, password } = req.body;
 
     if(!email) {
-      return res.status(422).json({message: "email is required."});
+      return res.status(422).json({message: "Email is required."});
     };
 
     if(!password) {
-      return res.status(422).json({message: "password is required."});
+      return res.status(422).json({message: "Password is required."});
     };
 
     const user = await User.findOne({ email: email });
 
     if(!user) {
-      return res.status(422).json({message: "email not registered."});
+      return res.status(422).json({message: "Email not registered."});
     };
 
     const checkPassword = await bcrypt.compare(password, user.password);
@@ -84,7 +84,6 @@ module.exports = class UserController {
     if(req.headers.authorization) {
       const token = getToken(req);
       const decoded = jwt.verify(token, "oursecret");
-      console.log(decoded)
       currentUser = await User.findById(decoded.id);
       currentUser.password = undefined;
     } else{
@@ -98,14 +97,13 @@ module.exports = class UserController {
     const user = await User.findById(id).select("-password");
 
     if(!user) {
-      return res.status(422).json({ message: "user not found." });
+      return res.status(422).json({ message: "User not found." });
     };
     
     return res.status(200).json({ user });
   };
 
   static async editUser(req, res) {
-    const id = req.params.id;
     const token = getToken(req);
     const user = await getUserByToken(token);
     const { name, email, phone, password, confirmPassword } = req.body;
@@ -115,27 +113,27 @@ module.exports = class UserController {
     };
 
     if(!name) {
-      return res.status(422).json({ message: "name is required."} );
+      return res.status(422).json({ message: "Name is required."} );
     };
     user.name = name;
 
     if(!email) {
-      return res.status(422).json({ message: "email is required."} );
+      return res.status(422).json({ message: "Email is required."} );
     };
     const emailExists = await User.findOne({ email: email });
 
     if(user.email !== email && emailExists){
-      return res.status(422).json({ message: "email already in use."} );
+      return res.status(422).json({ message: "Email already in use."} );
     };
     user.email = email;
 
     if(!phone) {
-      return res.status(422).json({ message: "phone is required."} );
+      return res.status(422).json({ message: "Phone is required."} );
     };
     user.phone = phone;
 
     if(password != confirmPassword) {
-      return res.status(422).json({message: "passwords doesn't match."});
+      return res.status(422).json({message: "Passwords doesn't match."});
     } else if(password === confirmPassword && password != null) {
       const salt = await bcrypt.genSalt(12);
       const passwordHash = await bcrypt.hash(password, salt);
@@ -149,7 +147,7 @@ module.exports = class UserController {
         { new: true }
       );
       user.password = undefined;
-      return res.status(200).json({ message: "user updated.", user});
+      return res.status(200).json({ message: "User updated successfully.", user});
     } catch(err) {
       return res.status(500).json({ message: err });
     };
