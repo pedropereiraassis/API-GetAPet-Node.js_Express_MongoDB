@@ -2,13 +2,13 @@
 Project to simulate pet adoption using Node.js, Express.js, MongoDB and React.js.
 
 # Usage
-In order to run properlly both frontend and backend you need to run the 
+In order to run properlly both api and client server you need to run the 
 following command to install all the necessary dependencies inside both folders.
 ```
 npm install
 ```
 
-Then to start the application run the command in frontend and backend folders.
+Then to start the application run the command in api and client folders.
 ```
 npm start
 ```
