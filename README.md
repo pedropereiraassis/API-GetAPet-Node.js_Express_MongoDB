@@ -19,8 +19,8 @@ Note: to run the application the way it has to you'll need to install and run a
 MongoDB server in your machine.
 
 # Running with Docker
-If you want to run all servers (client, api and database) in a container you need
-to have docker running and then run the command to build and run all containers:
+If you want to start all servers (client, api and database) in containers you need
+to have docker running and then execute the command to build and run all containers:
 ```
 docker-compose up --build
 ```
