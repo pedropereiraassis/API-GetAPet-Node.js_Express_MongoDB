@@ -6,7 +6,7 @@ services:
     container_name: client
     restart: on-failure:10
     environment:
-      REACT_APP_API_URL: http://api:5000/
+      REACT_APP_API_URL: http://localhost:5000
     ports:
       - 3000:3000
   
@@ -23,6 +23,7 @@ services:
     restart: on-failure:10
     environment:
       MONGO_URI: mongodb://mongo:27017/getapet
+      APP_URL: http://localhost:3000
     ports:
       - 5000:5000
     links:
