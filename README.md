@@ -20,12 +20,7 @@ MongoDB server in your machine.
 
 # Running with Docker
 If you want to run all servers (client, api and database) in a container you need
-to have docker running and then run the command to build the images:
+to have docker running and then run the command to build and run all containers:
 ```
-docker-compose build
-```
-
-And the command to run the containers:
-```
-docker-compose up
+docker-compose up --build
 ```
